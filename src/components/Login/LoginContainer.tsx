@@ -88,6 +88,7 @@ export const InitialisationContainer: FunctionComponent<NavigationProps> = ({
   const resetStage = (): void => {
     setLoginStage("SCAN");
   };
+  const [lastResendWarningMessage, setLastResendWarningMessage] = useState("");
 
   const handleLogout = useCallback((): void => {
     logout(navigation.dispatch);
@@ -252,6 +253,7 @@ export const InitialisationContainer: FunctionComponent<NavigationProps> = ({
               setMobileNumber={setMobileNumber}
               codeKey={codeKey}
               endpoint={endpointTemp}
+              setLastResendWarningMessage={setLastResendWarningMessage}
             />
           )}
           {loginStage === "OTP" && (
@@ -260,6 +262,8 @@ export const InitialisationContainer: FunctionComponent<NavigationProps> = ({
               mobileNumber={mobileNumber}
               codeKey={codeKey}
               endpoint={endpointTemp}
+              setLastResendWarningMessage={setLastResendWarningMessage}
+              lastResendWarningMessage={lastResendWarningMessage}
             />
           )}
           <FeatureToggler feature="HELP_MODAL">
@@ -267,6 +271,15 @@ export const InitialisationContainer: FunctionComponent<NavigationProps> = ({
           </FeatureToggler>
         </View>
       </KeyboardAvoidingScrollView>
+      <Credits style={{ bottom: size(3) }} />
+      {shouldShowCamera && (
+        <IdScanner
+          onBarCodeScanned={onBarCodeScanned}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+          onCancel={() => setShouldShowCamera(false)}
+          cancelButtonText="Cancel"
+        />
+      )}
     </>
   );
 };
