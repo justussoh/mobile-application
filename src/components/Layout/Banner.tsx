@@ -51,7 +51,7 @@ export const Banner: FunctionComponent<Banner> = ({
 }) => (
   <View style={styles.wrapper}>
     {featherIconName && (
-      <View style={styles.iconWrapper}>
+      <View testID="banner-icon" style={styles.iconWrapper}>
         <Feather
           name={featherIconName}
           size={size(2.5)}

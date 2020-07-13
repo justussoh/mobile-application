@@ -41,6 +41,7 @@ export const InputWithLabel: FunctionComponent<InputWithLabel> = ({
   <View>
     <AppText style={styles.label}>{label}</AppText>
     <TextInput
+      testID="input-with-label-input"
       style={[
         styles.input,
         ...(editable ? [styles.inputEditable] : [styles.inputNotEditable])

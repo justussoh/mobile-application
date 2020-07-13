@@ -12,7 +12,7 @@ export const AppName: FunctionComponent<AppName> = (
   { mode } = { mode: AppMode.production }
 ) => (
   <>
-    <AppLogo />
+    <AppLogo testID="app-logo" />
     {mode === AppMode.staging ? (
       <AppText
         style={{

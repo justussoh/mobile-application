@@ -53,7 +53,7 @@ export const AppHeaderComponent: FunctionComponent<AppHeader> = ({
   return (
     <View style={styles.appHeaderWrapper}>
       <AppName mode={mode} />
-      <TouchableOpacity onPress={onPressLogout}>
+      <TouchableOpacity testID="app-header-logout" onPress={onPressLogout}>
         <View
           style={{
             flexDirection: "row",

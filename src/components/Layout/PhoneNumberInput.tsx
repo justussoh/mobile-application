@@ -66,6 +66,7 @@ export const PhoneNumberInput: FunctionComponent<{
       <AppText style={styles.label}>{label}</AppText>
       <View style={styles.inputsWrapper}>
         <TextInput
+          testID="country-code-input"
           style={styles.countryCode}
           keyboardType="phone-pad"
           value={countryCodeValue}
@@ -73,6 +74,7 @@ export const PhoneNumberInput: FunctionComponent<{
         />
         <AppText style={styles.hyphen}>-</AppText>
         <TextInput
+          testID="mobile-number-input"
           style={styles.numberInput}
           keyboardType="phone-pad"
           value={mobileNumberValue}

@@ -53,7 +53,7 @@ interface Toggle {
   isChecked: boolean;
 }
 
-const Toggle: FunctionComponent<Toggle> = ({ isChecked }) => {
+export const Toggle: FunctionComponent<Toggle> = ({ isChecked }) => {
   return (
     <View
       style={[
@@ -62,7 +62,12 @@ const Toggle: FunctionComponent<Toggle> = ({ isChecked }) => {
       ]}
     >
       {isChecked && (
-        <Feather name="check" size={size(2.5)} color={color("grey", 80)} />
+        <Feather
+          testId="toggle-check"
+          name="check"
+          size={size(2.5)}
+          color={color("grey", 80)}
+        />
       )}
     </View>
   );
@@ -80,6 +85,7 @@ export const Checkbox: FunctionComponent<Checkbox> = ({
 }) => {
   return (
     <TouchableHighlight
+      testID="checkbox-box"
       onPress={() => {
         onToggle(!isChecked);
         if (Platform.OS === "android") {

@@ -19,6 +19,7 @@ export const TopBackground: FunctionComponent<TopBackground> = ({
     : color("orange", 30);
   return (
     <LinearGradient
+      testID="top-background"
       style={[
         {
           backgroundColor: primaryColor,
