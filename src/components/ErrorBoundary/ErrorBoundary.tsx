@@ -112,7 +112,7 @@ export class ErrorBoundary extends Component<unknown, State> {
         </View>
       </View>
     ) : (
-        this.props.children
-      );
+      this.props.children
+    );
   }
 }
