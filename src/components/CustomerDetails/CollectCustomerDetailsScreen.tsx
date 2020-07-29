@@ -27,7 +27,7 @@ import { BarCodeScanner, BarCodeScannedCallback } from "expo-barcode-scanner";
 import { validateAndCleanId } from "../../utils/validateIdentification";
 import { InputIdSection } from "./InputIdSection";
 import { AppHeader } from "../Layout/AppHeader";
-import * as Sentry from "sentry-expo";
+import { Sentry } from "../../utils/errorTracking";
 import { HelpButton } from "../Layout/Buttons/HelpButton";
 import { HelpModalContext } from "../../context/help";
 import { FeatureToggler } from "../FeatureToggler/FeatureToggler";
@@ -115,8 +115,8 @@ const CollectCustomerDetailsScreen: FunctionComponent<NavigationFocusInjectedPro
       setIsScanningEnabled(false);
       const id = validateAndCleanId(
         input,
-        features?.id.validation,
-        features?.id.validationRegex
+        features?.id?.validation,
+        features?.id?.validationRegex
       );
       Vibration.vibrate(50);
       navigation.navigate("CustomerQuotaScreen", { id });
@@ -171,7 +171,9 @@ const CollectCustomerDetailsScreen: FunctionComponent<NavigationFocusInjectedPro
               idInput={idInput}
               setIdInput={setIdInput}
               submitId={() => onCheck(idInput)}
-              idType={features?.id.type}
+              keyboardType={
+                features?.id?.type === "NUMBER" ? "numeric" : "default"
+              }
             />
           </Card>
           <FeatureToggler feature="HELP_MODAL">
@@ -186,7 +188,7 @@ const CollectCustomerDetailsScreen: FunctionComponent<NavigationFocusInjectedPro
           onCancel={() => setShouldShowCamera(false)}
           cancelButtonText="Enter ID manually"
           barCodeTypes={
-            features?.id.scannerType === "QR"
+            features?.id?.scannerType === "QR"
               ? [BarCodeScanner.Constants.BarCodeType.qr]
               : [BarCodeScanner.Constants.BarCodeType.code39]
           }
