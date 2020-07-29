@@ -18,35 +18,43 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      # setup Python
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
       # Clean Packages & Install Dependencies
       - name: Clean Packages
         run: |
           rm -rf node_modules
           npm cache clean --force
           rm -rf package-lock.json
-      # - name: Use specific Java version for sdkmanager to work
-      #   uses: joschi/setup-jdk@v1
-      #   with:
-      #     java-version: "openjdk8"
-      #     architecture: "x64"
-      # - name: Download Android Emulator Image
-      #   run: |
-      #     echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
-      #     echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
-      #     $ANDROID_HOME/emulator/emulator -list-avds
-      # Install
+      # Install Simulator
+      - name: Use specific Java version for sdkmanager to work
+        uses: joschi/setup-jdk@v1
+        with:
+          java-version: "openjdk8"
+          architecture: "x64"
+      - name: Download Android Emulator Image
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
+      Run Android Emulator
+      - name: Android Emulator
+        timeout-minutes: 10
+        continue-on-error: true
+        run: |
+          echo "Starting emulator"
+          nohup $ANDROID_HOME/emulator/emulator -avd emu -no-audio -no-snapshot -no-window &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
+      # Install Application
       - name: Install
         run: npm install
-      # Run Android Emulator
-      # - name: Android Emulator
-      #   timeout-minutes: 10
-      #   continue-on-error: true
-      #   run: |
-      #     echo "Starting emulator"
-      #     nohup $ANDROID_HOME/emulator/emulator -avd emu -no-audio -no-snapshot -no-window &
-      #     $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-      #     $ANDROID_HOME/platform-tools/adb devices
-      #     echo "Emulator started"
+      # setup e2e
+      - name: install appium
+        run: npm install appium -g
       - uses: expo/expo-github-action@v5
         with:
           expo-packager: npm
@@ -54,7 +62,14 @@ jobs:
           expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
           expo-cache: true
       - name: start app
-        run: npm run start
+        run: npm run start &
+
+      # install robot
+      - name: install robot
+        run: |
+          cd e2e
+          pip3 install -r requirements.txt
+          robot test.txt
       # # Use HTTPS repos
       # - name: Use HTTPS repos
       #   run: |
