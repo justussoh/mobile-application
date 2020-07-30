@@ -31,7 +31,7 @@ Start Appium
 Setup
     Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
-    ...  app=${ANDROID_APP}   udid=${DEVICE_NAME}    autoLaunch=false
+    ...  udid=${DEVICE_NAME}    autoLaunch=false
 
 Open Expo App	
 	# First time opening Expo.io
@@ -77,11 +77,11 @@ Close All Apps
 Start Appium and Install App
     Start Appium
     Setup
-    # Open Expo App
-	# Logout if Logged In
-	# Enter Mobile and OTP
+    Open Expo App
+	Logout if Logged In
+	Enter Mobile and OTP
 	Sleep	5
-	# Logout if Logged In	
+	Logout if Logged In	
 
 Teardown
 	Close All Apps
