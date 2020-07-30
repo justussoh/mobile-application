@@ -82,10 +82,10 @@ Install App
 
 Do Test
     Open Expo App
-	#Logout if Logged In
-	#Enter Mobile and OTP
+	Logout if Logged In
+	Enter Mobile and OTP
 	Sleep	5
-	#Logout if Logged In	
+	Logout if Logged In	
 
 Teardown
 	Close All Apps

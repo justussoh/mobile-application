@@ -73,10 +73,15 @@ jobs:
           robot test.txt
       # Upload Appium Logs
       - name: Upload Appium logs
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: test file
-          path: ./e2e
+          path: |
+            ./e2e/log.html
+            ./e2e/report.html
+            ./e2e/output.xml
+            ./e2e/appium_kill_stdout.txt
       # # Upload Test Results
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v1
