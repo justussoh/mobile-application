@@ -59,7 +59,7 @@ jobs:
           expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
           expo-cache: true
       - name: start app
-        run: npm run start -- --android --localhost --non-interactive &
+        run: npm run start -- --tunnel --non-interactive
       #open uri
       - name: open deep link
         run: |
