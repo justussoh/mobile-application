@@ -49,20 +49,20 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
-      # Install Application
-      - name: Install
-        run: npm install
+      # # Install Application
+      # - name: Install
+      #   run: npm install
       # setup e2e
       - name: install appium
         run: npm install appium -g
-      - uses: expo/expo-github-action@v5
-        with:
-          expo-packager: npm
-          expo-username: ${{ secrets.EXPO_CLI_TEST_USERNAME }}
-          expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
-          expo-cache: true
+      # - uses: expo/expo-github-action@v5
+      #   with:
+      #     expo-packager: npm
+      #     expo-username: ${{ secrets.EXPO_CLI_TEST_USERNAME }}
+      #     expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
+      #     expo-cache: true
       # - name: start app
-      #   run: npm run start &
+      #   run: npm run start -- --android --non-interactive &
       # install robot
       - name: install robot
         run: |

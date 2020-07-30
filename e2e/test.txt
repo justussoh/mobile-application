@@ -81,11 +81,11 @@ Close All Apps
 Start Appium and Install App
     Start Appium
     Setup
-    Open Expo App
-	Logout if Logged In
-	Enter Mobile and OTP
+    # Open Expo App
+	# Logout if Logged In
+	# Enter Mobile and OTP
 	Sleep	5
-	Logout if Logged In	
+	# Logout if Logged In	
 
 Teardown
 	Close All Apps
