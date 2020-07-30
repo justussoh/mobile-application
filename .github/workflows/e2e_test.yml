@@ -39,7 +39,7 @@ jobs:
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
           $ANDROID_HOME/emulator/emulator -list-avds
-      # Run Android Emulato
+      # Run Android Emulator
       - name: Android Emulator
         timeout-minutes: 10
         continue-on-error: true
@@ -61,9 +61,8 @@ jobs:
           expo-username: ${{ secrets.EXPO_CLI_TEST_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
           expo-cache: true
-      - name: start app
-        run: npm run start &
-
+      # - name: start app
+      #   run: npm run start &
       # install robot
       - name: install robot
         run: |
