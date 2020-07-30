@@ -34,10 +34,6 @@ Setup
     ...  app=${ANDROID_APP}   udid=${DEVICE_NAME}    autoLaunch=false
 
 Open Expo App	
-	${deeplink}=	Set Variable	exp://exp.host/@supplyallytest/rationally/--/login?release-channel=staging&key=${TOKEN}&endpoint=${ENDPOINT_URL}
-
-	Start Process    adb shell am start -a android.intent.action.VIEW -d ${deeplink} ${BUNDLE_ID}    shell=True    stdout=${CURDIR}/android_kill_stdout.txt
-
 	# First time opening Expo.io
 	${first_time_expo} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Got it']	timeout=10
 	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Got it']	
@@ -81,7 +77,7 @@ Close All Apps
 Start Appium and Install App
     Start Appium
     Setup
-    Open Expo App
+    # Open Expo App
 	# Logout if Logged In
 	# Enter Mobile and OTP
 	Sleep	5
