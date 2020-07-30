@@ -59,7 +59,7 @@ jobs:
           expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
           expo-cache: true
       - name: Expo Publish Channel
-        run: expo publish --non-interactive --release-channel e2e
+        run: APP_BUILD_VERSION=1.0.0 APP_BINARY_VERSION=1 expo publish --non-interactive --release-channel e2e
       #open uri
       - name: open deep link
         run: |
