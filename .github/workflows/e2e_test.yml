@@ -78,7 +78,7 @@ jobs:
       # run e2e
       - name: run e2e
         run: |
-          npm run start -- --android --non-interactive
+          npm run start -- --android --non-interactive &
           sleep 15
           npm run test:e2e
       # Upload Appium Logs
