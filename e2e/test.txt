@@ -1,0 +1,92 @@
+*** Settings ***
+Library		 Process
+Library 	 CustomAppiumLibrary.py
+
+*** Variables ***
+${REMOTE_URL}		http://127.0.0.1:4723/wd/hub	 # URL to appium server
+${ANDROID_AUTOMATION_NAME}    UIAutomator2
+${ANDROID_APP}                ${CURDIR}/Exponent-2.16.1.apk
+${ANDROID_PLATFORM_NAME}      Android
+${PLATFORM_VERSION}
+${DEVICE_NAME}
+
+${BUNDLE_ID}			host.exp.exponent
+
+${TOKEN}				c3cfc101-e8c0-4647-9b9b-d05b0573e4b7
+${ENDPOINT_URL}			https://api.staging.sally-dev.stack.gov.sg
+
+
+*** Keywords *** 
+
+Get Device Details
+	${result} =    Run Process    adb    shell    getprop    ro.serialno
+	${DEVICE_NAME} =    Set Variable    ${result.stdout}
+	${result} =    Run Process    adb    shell    getprop    ro.build.version.release 
+	${PLATFORM_VERSION} =    Set Variable    ${result.stdout}
+
+Start Appium
+    Start Process    appium    shell=True    stdout=${CURDIR}/appium_kill_stdout.txt    stderr=${CURDIR}/appium_kill_stderr.txt
+    Sleep   10s
+
+Setup
+    Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
+    ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
+    ...  udid=${DEVICE_NAME}
+	Sleep   10s
+
+Open Expo App	
+	# First time opening Expo.io
+	${first_time_expo} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Got it']	timeout=10
+	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Got it']	
+	Run Keyword If    ${first_time_expo}	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Reload']	timeout=30
+	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Reload']
+
+Logout if Logged In
+	${logged_in} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Logout']	timeout=5
+	Log     Logged in ${logged_in}
+	
+	Run Keyword If    ${logged_in}	Click Element	xpath=//android.widget.TextView[@text='Logout']
+	Run Keyword If    ${logged_in}	Wait Until Element Is Visible	xpath=//android.widget.Button[@text='LOGOUT']	timeout=30
+	Run Keyword If    ${logged_in}	Click Element	xpath=//android.widget.Button[@text='LOGOUT']
+
+	# Paiseh SupplyAlly has encountered an issue...
+	${app_crashed} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Restart app']	timeout=5
+	Log     App crashed ${app_crashed}
+	Run Keyword If    ${app_crashed}	Click Element	xpath=//android.widget.TextView[@text='Restart app']
+
+Enter Mobile and OTP
+	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Mobile phone number']	timeout=30
+
+	# Enter Mobile Number
+	Click Element	xpath=//android.widget.EditText[@index='4']
+	Input Text		xpath=//android.widget.EditText[@index='4']    91234567
+
+	# Click Send OTP
+	Click Element  xpath=//android.widget.TextView[@text='Send OTP']
+
+	# To Dos: Enter OTP
+	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='OTP']	timeout=10
+
+	Input Text  xpath=//android.view.ViewGroup[@index='2']/android.widget.EditText[@index='2']	000000
+	Click Element  xpath=//android.widget.TextView[@text='Submit']
+
+Close All Apps
+	Close All Applications
+
+
+*** Test Cases ***
+Start Appium
+    Start Appium
+
+Install App
+    Setup
+
+Do Test
+    Open Expo App
+	Logout if Logged In
+	Enter Mobile and OTP
+	Sleep	5
+	Logout if Logged In	
+
+Teardown
+	Close All Apps
