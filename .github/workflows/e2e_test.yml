@@ -75,12 +75,17 @@ jobs:
         run: |
           cd e2e
           pip3 install -r requirements.txt
+      - name: ip
+        id: ip
+        run: |
+          IP=$(echo $(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | grep -Eo '10.40.0.[0-9]*'))
+          echo "::set-output name=ip::${IP}"
       # run e2e
       - name: run e2e
         run: |
           npm run start -- --non-interactive &
-          sleep 15
-          $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d "exp://10.40.0.62:19000/--/login?key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7\&endpoint=https://api.staging.sally-dev.stack.gov.sg"
+          sleep 30
+          $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d "exp://${{steps.ip.outputs.ip}}:19000/--/login?key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7\&endpoint=https://api.staging.sally-dev.stack.gov.sg"
           sleep 15
           npm run test:e2e
       # Upload Appium Logs
