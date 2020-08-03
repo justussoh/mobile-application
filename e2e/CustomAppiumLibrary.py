@@ -9,7 +9,7 @@ class CustomAppiumLibrary(AppiumLibrary):
         self._current_application().terminate_app(package)    
 
     # Open Deep Link
-    def OpenDeepLink(self, url, package):
+    def OpenDeepLink(self, url):
         self.TerminateApp(package)
         # self._current_application().execute_script('mobile:deepLink',{'url': url, 'package': package})
         self._current_application().get(url)
