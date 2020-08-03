@@ -11,7 +11,8 @@ class CustomAppiumLibrary(AppiumLibrary):
     # Open Deep Link
     def OpenDeepLink(self, url, package):
         self.TerminateApp(package)
-        self._current_application().execute_script('mobile:deepLink',{'url': url, 'package': package})
+        # self._current_application().execute_script('mobile:deepLink',{'url': url, 'package': package})
+        self._current_application().get(url)
 
     # Reference Keywords
     def KeyboardType(self, textToType):
