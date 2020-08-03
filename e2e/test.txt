@@ -77,16 +77,21 @@ Close All Apps
 *** Test Cases ***
 Start Appium
     Start Appium
+	Sleep	30
 
 Install App
     Setup
+	Sleep	30
 
 Do Test
     Open Expo App
+	Sleep	30
 	Logout if Logged In
+	Sleep	30
 	Enter Mobile and OTP
-	Sleep	5
+	Sleep	30
 	Logout if Logged In	
+	Sleep	30
 
 Teardown
 	Close All Apps
