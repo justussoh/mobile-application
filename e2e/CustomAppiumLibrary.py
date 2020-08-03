@@ -9,11 +9,11 @@ class CustomAppiumLibrary(AppiumLibrary):
         self._current_application().terminate_app(package)    
 
     # Open Deep Link
-    def OpenDeepLink(self, url):
-        # self.TerminateApp(package)
-        # self._current_application().execute_script('mobile:deepLink',{'url': url, 'package': package})
-        # self._current_application().execute_script('mobile: shell',{'command': 'am start', "args": ["-a", "android.intent.action.VIEW", "-d", url]})
-        self._current_application().get(url)
+    def OpenDeepLink(self, url, package):
+        self.TerminateApp(package)
+        self._current_application().execute_script('mobile:deepLink',{'url': url.replace('&', '\&'), 'package': package})
+        # self._current_application().execute_script('mobile: shell',{'command': 'am start', "args": ["-a", "android.intent.action.VIEW", "-d", url.replace('&', '\&')]})
+        # self._current_application().get(url)
 
     # Reference Keywords
     def KeyboardType(self, textToType):

@@ -32,10 +32,10 @@ Start Appium
 Setup
     Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
-    ...  udid=${DEVICE_NAME}  newCommandTimeout=600
+    ...  udid=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
 	Sleep   30s
-	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}\&endpoint=${ENDPOINT_URL}
-	Open Deep Link 	${deeplink}
+	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
+	Open Deep Link 	${deeplink}    	${BUNDLE_ID}
 	Sleep   180s
 
 Open Expo App	
