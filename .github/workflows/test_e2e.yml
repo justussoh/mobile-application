@@ -90,12 +90,12 @@ jobs:
           sleep 30
           cd e2e
           robot --variable IP:${{steps.ip.outputs.ip}} test.txt
-      # Upload Appium Logs
+      # Upload Appium Log
       - name: Upload Appium logs
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: test file
+          name: output
           path: |
             ./e2e/log.html
             ./e2e/report.html
