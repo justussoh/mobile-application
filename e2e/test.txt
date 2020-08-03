@@ -36,7 +36,7 @@ Setup
 	Sleep   30s
 	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
 	Open Deep Link	${deeplink}    ${BUNDLE_ID}
-	Sleep   30s
+	Sleep   180s
 
 Open Expo App	
 	# First time opening Expo.io
