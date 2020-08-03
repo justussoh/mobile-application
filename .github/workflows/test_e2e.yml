@@ -88,7 +88,8 @@ jobs:
           sleep 30
           $ANDROID_HOME/platform-tools/adb -s emulator-5554 install ./e2e/Exponent-2.16.1.apk
           sleep 30
-          npm run test:e2e -- -v IP:${{steps.ip.outputs.ip}}
+          cd e2e
+          robot test.text -v IP:${{steps.ip.outputs.ip}}
       # Upload Appium Logs
       - name: Upload Appium logs
         if: always()
