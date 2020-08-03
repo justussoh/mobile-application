@@ -26,7 +26,7 @@ Get Device Details
 	${PLATFORM_VERSION} =    Set Variable    ${result.stdout}
 
 Start Appium
-    Start Process    appium    shell=True    stdout=${CURDIR}/appium_kill_stdout.txt    stderr=${CURDIR}/appium_kill_stderr.txt
+    Start Process    appium --relaxed-security    shell=True    stdout=${CURDIR}/appium_kill_stdout.txt    stderr=${CURDIR}/appium_kill_stderr.txt
     Sleep   30s
 
 Setup
