@@ -34,7 +34,7 @@ Setup
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
     ...  udid=${DEVICE_NAME}  newCommandTimeout=600
 	Sleep   30s
-	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
+	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}\&endpoint=${ENDPOINT_URL}
 	Open Deep Link 	${deeplink}
 	Sleep   180s
 
