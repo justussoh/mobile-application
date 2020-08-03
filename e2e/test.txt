@@ -88,8 +88,6 @@ Install App
 Do Test
     Open Expo App
 	Sleep	15
-	Logout if Logged In
-	Sleep	15
 	Enter Mobile and OTP
 	Sleep	15
 	Logout if Logged In	
