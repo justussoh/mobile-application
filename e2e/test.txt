@@ -34,8 +34,8 @@ Setup
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
     ...  udid=${DEVICE_NAME}
 	Sleep   30s
-	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
-	Go To URL	${deeplink}
+	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}\&endpoint=${ENDPOINT_URL}
+	Run Process    $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d  ${deeplink}    shell=True    stdout=${CURDIR}/appium_android_stdout.txt
 	Sleep   180s
 
 Open Expo App	
