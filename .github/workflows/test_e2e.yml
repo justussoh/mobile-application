@@ -87,9 +87,8 @@ jobs:
           npm run start -- --non-interactive &
           sleep 30
           $ANDROID_HOME/platform-tools/adb -s emulator-5554 install ./e2e/Exponent-2.16.1.apk
-          $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d "exp://${{steps.ip.outputs.ip}}:19000/--/login?key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7\&endpoint=https://api.staging.sally-dev.stack.gov.sg"
-          sleep 300
-          npm run test:e2e
+          sleep 30
+          npm run test:e2e -- -v IP:${{steps.ip.outputs.ip}}
       # Upload Appium Logs
       - name: Upload Appium logs
         if: always()

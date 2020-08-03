@@ -11,6 +11,7 @@ ${PLATFORM_VERSION}
 ${DEVICE_NAME}
 
 ${BUNDLE_ID}			host.exp.exponent
+${IP}					127.0.0.1
 
 ${TOKEN}				c3cfc101-e8c0-4647-9b9b-d05b0573e4b7
 ${ENDPOINT_URL}			https://api.staging.sally-dev.stack.gov.sg
@@ -26,13 +27,16 @@ Get Device Details
 
 Start Appium
     Start Process    appium    shell=True    stdout=${CURDIR}/appium_kill_stdout.txt    stderr=${CURDIR}/appium_kill_stderr.txt
-    Sleep   10s
+    Sleep   30s
 
 Setup
     Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
     ...  udid=${DEVICE_NAME}
-	Sleep   10s
+	Sleep   30s
+	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
+	Open Deep Link	${deeplink}
+	Sleep   30s
 
 Open Expo App	
 	# First time opening Expo.io
@@ -77,7 +81,9 @@ Close All Apps
 *** Test Cases ***
 Start Appium
     Start Appium
-	Sleep	30
+
+Install App
+    Setup
 
 Do Test
     Open Expo App
