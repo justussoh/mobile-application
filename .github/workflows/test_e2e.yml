@@ -73,11 +73,11 @@ jobs:
       - name: Expo Publish Channel
         run: APP_BUILD_VERSION=1.0.0 APP_BINARY_VERSION=1 expo publish --non-interactive --release-channel e2e
       # open uri
+      # $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d "exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e\&key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7\&endpoint=https://api.staging.sally-dev.stack.gov.sg"
       - name: open deep link
         run: |
           echo "Emulator starting to install apk"
           $ANDROID_HOME/platform-tools/adb -s emulator-5554 install ./e2e/Exponent-2.16.1.apk
-          $ANDROID_HOME/platform-tools/adb shell am start -W -a android.intent.action.VIEW -d "exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e\&key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7\&endpoint=https://api.staging.sally-dev.stack.gov.sg"
           echo "Emulator done"
       # setup e2e
       - name: install appium
@@ -94,11 +94,11 @@ jobs:
       #     echo The host IP address is $IP
       #     echo "::set-output name=ip::$IP
       # run e2e
-      - name: ss
-        run: |
-          $ANDROID_HOME/platform-tools/adb shell input keyevent 4
-          $ANDROID_HOME/platform-tools/adb shell input keyevent 4
-          $ANDROID_HOME/platform-tools/adb exec-out screencap -p > screen.png
+      # - name: ss
+      #   run: |
+      #     $ANDROID_HOME/platform-tools/adb shell input keyevent 4
+      #     $ANDROID_HOME/platform-tools/adb shell input keyevent 4
+      #     $ANDROID_HOME/platform-tools/adb exec-out screencap -p > screen.png
       - name: run e2e
         run: |
           cd e2e
