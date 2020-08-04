@@ -96,6 +96,8 @@ jobs:
       # run e2e
       - name: ss
         run: |
+          $ANDROID_HOME/platform-tools/adb shell input keyevent 4
+          $ANDROID_HOME/platform-tools/adb shell input keyevent 4
           $ANDROID_HOME/platform-tools/adb exec-out screencap -p > screen.png
       - name: run e2e
         run: |
