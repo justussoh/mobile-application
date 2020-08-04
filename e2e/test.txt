@@ -3,11 +3,11 @@ Library		 Process
 Library 	 CustomAppiumLibrary.py
 
 *** Variables ***
-${REMOTE_URL}		http://127.0.0.1:4723/wd/hub	 # URL to appium server
+${REMOTE_URL}				  http://127.0.0.1:4723/wd/hub	 # URL to appium server
 ${ANDROID_AUTOMATION_NAME}    UIAutomator2
 ${ANDROID_APP}                ${CURDIR}/Exponent-2.16.1.apk
 ${ANDROID_PLATFORM_NAME}      Android
-${PLATFORM_VERSION}			  4.2.2
+${PLATFORM_VERSION}			  10
 ${DEVICE_NAME}				  emulator-5554
 
 ${BUNDLE_ID}			host.exp.exponent
@@ -19,12 +19,6 @@ ${ENDPOINT_URL}			https://api.staging.sally-dev.stack.gov.sg
 
 *** Keywords *** 
 
-Get Device Details
-	${result} =    Run Process    adb    shell    getprop    ro.serialno
-	${DEVICE_NAME} =    Set Variable    ${result.stdout}
-	${result} =    Run Process    adb    shell    getprop    ro.build.version.release 
-	${PLATFORM_VERSION} =    Set Variable    ${result.stdout}
-
 Start Appium
     Start Process    appium --relaxed-security    shell=True    stdout=${CURDIR}/appium_kill_stdout.txt    stderr=${CURDIR}/appium_kill_stderr.txt
     Sleep   30s
@@ -33,9 +27,6 @@ Setup
     Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
     ...  udid=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
-	Sleep   30s
-	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
-	Open Deep Link 	  ${deeplink}    	${BUNDLE_ID}
 	Sleep   180s
 
 Open Expo App	
@@ -86,7 +77,7 @@ Install App
     Setup
 
 Do Test
-    Open Expo App
+	Open Expo App
 	Sleep	15
 	Enter Mobile and OTP
 	Sleep	15
