@@ -49,13 +49,13 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
-       - name: Retrieve Device Name  
+      - name: Retrieve Device Name  
         id: deviceName
         run: |
           DEVICE_NAME=$(echo $($ANDROID_HOME/platform-tools/adb devices | egrep -o 'emulator-[0-9]*'))
           echo Emulator UUID is $DEVICE_NAME
           echo "::set-output deviceName=ip::$DEVICE_NAME"
-       - name: Retrieve Emulator Version
+      - name: Retrieve Emulator Version
         id: platformVersion
         run: |
           PLATFORM_VERSION=$(echo $($ANDROID_HOME/platform-tools/adb shell getprop ro.build.version.release))
