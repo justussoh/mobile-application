@@ -38,7 +38,8 @@ Open Expo App
 	${first_time_expo} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Got it']	timeout=10
 	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Got it']	
 	Run Keyword If    ${first_time_expo}	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Reload']	timeout=30
-	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Reload']
+	Run Keyword If    ${first_time_expo}	Go Back
+	Capture Page Screenshot    screen2.png
 
 Logout if Logged In
 	${logged_in} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Logout']	timeout=5

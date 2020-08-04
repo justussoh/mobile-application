@@ -111,6 +111,7 @@ jobs:
           name: output
           path: |
             ./e2e/screen.png
+            ./e2e/screen2.png
             ./e2e/log.html
             ./e2e/report.html
             ./e2e/output.xml
