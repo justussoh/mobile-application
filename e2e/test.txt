@@ -35,7 +35,7 @@ Setup
     ...  udid=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
 	Sleep   30s
 	${deeplink}=	Set Variable	exp://${IP}:19000/--/login?key=${TOKEN}&endpoint=${ENDPOINT_URL}
-	Open Deep Link 	${deeplink}    	${BUNDLE_ID}
+	Open Deep Link 	  ${deeplink}    	${BUNDLE_ID}
 	Sleep   180s
 
 Open Expo App	
