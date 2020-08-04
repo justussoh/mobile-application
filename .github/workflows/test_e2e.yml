@@ -110,7 +110,7 @@ jobs:
         with:
           name: output
           path: |
-            ./screen.png
+            ./e2e/screen.png
             ./e2e/log.html
             ./e2e/report.html
             ./e2e/output.xml
