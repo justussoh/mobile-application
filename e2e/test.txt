@@ -31,15 +31,13 @@ Setup
 	${deeplink}=	Set Variable	exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e&key=${TOKEN}&endpoint=${ENDPOINT_URL}
 	Open Deep Link 	  ${deeplink}    	${BUNDLE_ID}
 	Sleep   180s
-	Capture Page Screenshot    screen.png
 
-Open Expo App	
+Open Expo App First Time
 	# First time opening Expo.io
 	${first_time_expo} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Got it']	timeout=10
 	Run Keyword If    ${first_time_expo}	Click Element	xpath=//android.widget.TextView[@text='Got it']	
 	Run Keyword If    ${first_time_expo}	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Reload']	timeout=30
 	Run Keyword If    ${first_time_expo}	Go Back
-	Capture Page Screenshot    screen2.png
 
 Logout if Logged In
 	${logged_in} =	Run Keyword And Return Status	Wait Until Element Is Visible	xpath=//android.widget.TextView[@text='Logout']	timeout=5
@@ -82,12 +80,9 @@ Install App
     Setup
 
 Do Test
-	Open Expo App
-	Sleep	15
+	Open Expo App First Time
 	Enter Mobile and OTP
-	Sleep	15
 	Logout if Logged In	
-	Sleep	15
 
 Teardown
 	Close All Apps
