@@ -54,13 +54,13 @@ jobs:
         run: |
           DEVICE_NAME=$(echo $($ANDROID_HOME/platform-tools/adb devices | egrep -o 'emulator-[0-9]*'))
           echo Emulator UUID is $DEVICE_NAME
-          echo "::set-output deviceName=ip::$DEVICE_NAME"
+          echo "::set-output name=deviceName::$DEVICE_NAME"
       - name: Retrieve Emulator Version
         id: platformVersion
         run: |
           PLATFORM_VERSION=$(echo $($ANDROID_HOME/platform-tools/adb shell getprop ro.build.version.release))
           echo Emulator platform version is $PLATFORM_VERSION
-          echo "::set-output platformVersion=ip::$PLATFORM_VERSION"
+          echo "::set-output name=platformVersion::$PLATFORM_VERSION"
       # Install Application
       - name: Install
         run: npm install
