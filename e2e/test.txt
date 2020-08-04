@@ -7,8 +7,8 @@ ${REMOTE_URL}		http://127.0.0.1:4723/wd/hub	 # URL to appium server
 ${ANDROID_AUTOMATION_NAME}    UIAutomator2
 ${ANDROID_APP}                ${CURDIR}/Exponent-2.16.1.apk
 ${ANDROID_PLATFORM_NAME}      Android
-${PLATFORM_VERSION}
-${DEVICE_NAME}
+${PLATFORM_VERSION}			  4.2.2
+${DEVICE_NAME}				  emulator-5554
 
 ${BUNDLE_ID}			host.exp.exponent
 ${IP}					127.0.0.1
@@ -83,7 +83,6 @@ Start Appium
     Start Appium
 
 Install App
-	Get Device Details
     Setup
 
 Do Test
