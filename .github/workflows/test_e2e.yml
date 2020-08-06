@@ -52,10 +52,16 @@ jobs:
           wget -O Exponent.tar.gz http://expo.io/--/api/v2/versions/download-ios-simulator-build
           mkdir expo_client
           tar  -C ./expo_client -zvxf Exponent.tar.gz
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-packager: npm
+          expo-username: ${{ secrets.EXPO_CLI_TEST_USERNAME }}
+          expo-password: ${{ secrets.EXPO_CLI_TEST_PASSWORD }}
+          expo-cache: true
       - name: Install Expo App
         run: |
           echo "Emulator starting to install ipa"
-          xcrun simctl install booted ./e2e/expo_client
+          expo client:install:ios
           echo "Emulator done"
           xcrun simctl io booted screenshot ./screen.png
       - name: Upload Appium Logs
