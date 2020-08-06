@@ -28,7 +28,7 @@ Setup
     ...  deviceName=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
 	Sleep   30s
 	${deeplink}=	Set Variable	exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e&key=${TOKEN}&endpoint=${ENDPOINT_URL}
-	Run Process    xcrun simctl openurl booted ${deeplink}    stdout=${CURDIR}/appium_ios_stdout.txt 
+	Run Process    xcrun simctl openurl booted ${deeplink}    shell=True    stdout=${CURDIR}/appium_ios_stdout.txt 
 	Sleep   180s
 	Capture Page Screenshot    screen.png
 
