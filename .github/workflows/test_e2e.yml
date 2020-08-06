@@ -31,7 +31,7 @@ jobs:
         id: ios
         run: |
           echo "Starting emulator"
-          UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" iOS13.3)
+          UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" iOS14.0)
           echo Emulator UUID is $UUID
           echo "::set-output name=uuid::$UUID"
           xcrun simctl boot $UUID
