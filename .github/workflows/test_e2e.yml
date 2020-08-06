@@ -65,7 +65,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: output
+          name: output_ios
           path: |
             ./e2e/screen.png
             ./e2e/log.html
@@ -141,7 +141,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: output
+          name: output_android
           path: |
             ./e2e/log.html
             ./e2e/report.html
