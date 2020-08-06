@@ -61,7 +61,7 @@ jobs:
       - name: Install Expo App
         run: |
           echo "Emulator starting to install ipa"
-          expo client:install:ios
+          expo client:install:ios --non-interactive
           echo "Emulator done"
           xcrun simctl io booted screenshot ./screen.png
       - name: Upload Appium Logs
