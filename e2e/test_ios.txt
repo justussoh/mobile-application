@@ -6,8 +6,8 @@ Library 	 CustomAppiumLibrary.py
 ${REMOTE_URL}				  http://127.0.0.1:4723/wd/hub	 # URL to appium server
 ${ANDROID_AUTOMATION_NAME}    XCUITest
 ${ANDROID_PLATFORM_NAME}      iOS
-${PLATFORM_VERSION}			      13.6
-${DEVICE_NAME}				        test
+${PLATFORM_VERSION}    13.6
+${DEVICE_NAME}    test
 
 ${BUNDLE_ID}			host.exp.exponent
 ${IP}					127.0.0.1
