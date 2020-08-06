@@ -1,5 +1,6 @@
 name: Pre-Commit E2E Tests in Android
 
+# For now leaving as PR so that we can test the functionality without pushing to master branch
 on: [pull_request]
 
 jobs:
@@ -65,6 +66,7 @@ jobs:
         run: |
           cd e2e
           wget -O Exponent-2.16.1.apk https://d1ahtucjixef4r.cloudfront.net/Exponent-2.16.1.apk
+          brew cask install webcamoid
           pip3 install -r requirements.txt
       - name: Install Expo App
         run: |
