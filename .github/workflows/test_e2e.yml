@@ -31,10 +31,10 @@ jobs:
         id: ios
         run: |
           sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
-          sudo ln -s /Applications/Xcode_12.0.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ iOS14.0.simruntime
+          sudo ln -s /Applications/Xcode_12.0.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 14.0.simruntime
           xcrun simctl list runtimes
           echo "Starting emulator"
-          UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" iOS14.0)
+          UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" "com.apple.CoreSimulator.SimRuntime.iOS-14-0")
           echo Emulator UUID is $UUID
           echo "::set-output name=uuid::$UUID"
           xcrun simctl boot $UUID
