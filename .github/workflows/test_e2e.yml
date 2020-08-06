@@ -43,8 +43,8 @@ jobs:
           echo "::set-output name=uuid::$UUID"
           xcrun simctl boot $UUID
           echo "Emulator started"
-      # - name: Setup Appium
-      #   run: npm install appium -g
+      - name: Setup Appium
+        run: npm install appium -g
       - name: Setup E2E Environment
         run: |
           cd e2e
@@ -57,15 +57,23 @@ jobs:
           echo "Emulator starting to install ipa"
           xcrun simctl install booted ./e2e/expo_client
           echo "Emulator done"
-          xcrun simctl openurl booted exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e&key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7&endpoint=https://api.staging.sally-dev.stack.gov.sg
-          xcrun simctl io booted screenshot ./screen.png
-      - name: Upload Appium Logs
+        # xcrun simctl openurl booted exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e&key=c3cfc101-e8c0-4647-9b9b-d05b0573e4b7&endpoint=https://api.staging.sally-dev.stack.gov.sg
+      - name: Run E2E Tests
+        run: |
+          cd e2e
+          robot test.txt
+          - name: Upload Appium Logs
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: output
           path: |
-            ./screen.png
+            ./e2e/screen.png
+            ./e2e/log.html
+            ./e2e/report.html
+            ./e2e/output.xml
+            ./e2e/appium_kill_stdout.txt
+            ./e2e/appium-screenshot-1.png
   # e2e_android:
   #   name: E2E Android Test
   #   runs-on: macOS-latest
