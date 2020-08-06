@@ -50,7 +50,8 @@ jobs:
           cd e2e
           pip3 install -r requirements.txt
           wget -O Exponent.tar.gz http://expo.io/--/api/v2/versions/download-ios-simulator-build
-          tar  -C /expo_client -zxvf Exponent.tar.gz
+          mkdir expo_client
+          tar  -C /expo_client -zvxf Exponent.tar.gz
       - name: Install Expo App
         run: |
           echo "Emulator starting to install ipa"
