@@ -25,7 +25,7 @@ Start Appium
 Setup
     Open Application  ${REMOTE_URL}   automationName=${ANDROID_AUTOMATION_NAME}
     ...  platformName=${ANDROID_PLATFORM_NAME}  platformVersion=${PLATFORM_VERSION}
-    ...  udid=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
+    ...  deviceName=${DEVICE_NAME}  newCommandTimeout=600  appWaitForLaunch=false
 	Sleep   30s
 	${deeplink}=	Set Variable	exp://exp.host/@justussoh/rationally/--/login?release-channel=e2e&key=${TOKEN}&endpoint=${ENDPOINT_URL}
 	Run Process    xcrun simctl openurl booted ${deeplink}    stdout=${CURDIR}/appium_ios_stdout.txt 
