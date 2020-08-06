@@ -30,13 +30,13 @@ jobs:
       - name: IOS emulator
         id: ios
         run: |
-          xcrun simctl list runtimes
           echo "Starting emulator"
           UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" "com.apple.CoreSimulator.SimRuntime.iOS-13-6")
           echo Emulator UUID is $UUID
           echo "::set-output name=uuid::$UUID"
           xcrun simctl boot $UUID
-          xcrun simctl io booted screenshot screen.png
+          echo "Emulator started"
+          xcrun simctl io booted screenshot ./screen.png
       - name: Upload Appium Logs
         if: always()
         uses: actions/upload-artifact@v2
