@@ -61,7 +61,7 @@ jobs:
       - name: Run E2E Tests
         run: |
           cd e2e
-          robot test.txt
+          robot test_ios.txt
       - name: Upload Appium Logs
         if: always()
         uses: actions/upload-artifact@v2
