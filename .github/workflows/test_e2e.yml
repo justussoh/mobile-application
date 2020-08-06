@@ -43,8 +43,8 @@ jobs:
           echo "::set-output name=uuid::$UUID"
           xcrun simctl boot $UUID
           echo "Emulator started"
-      - name: Setup Appium
-        run: npm install appium -g
+      # - name: Setup Appium
+      #   run: npm install appium -g
       - name: Setup E2E Environment
         run: |
           cd e2e
