@@ -25,18 +25,20 @@ jobs:
   e2e_ios:
     name: E2E IOS Test
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        destination: ["platform=iOS Simulator,OS=12.2,name=iPhone X"]
     steps:
       - uses: actions/checkout@v2
       - name: IOS emulator
         id: ios
         run: |
+          sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
+          sudo ln -s /Applications/Xcode_12.0.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ iOS14.0.simruntime
+          xcrun simctl list runtimes
           echo "Starting emulator"
-          echo Emulator UUID is ${destination}
-        env:
-          destination: ${{ matrix.destination }}
+          UUID=$(xcrun simctl create "test" "iPhone 11 Pro Max" iOS14.0)
+          echo Emulator UUID is $UUID
+          echo "::set-output name=uuid::$UUID"
+          xcrun simctl boot $UUID
+          xcrun simctl io booted screenshot screen.png
       - name: Upload Appium Logs
         if: always()
         uses: actions/upload-artifact@v2
