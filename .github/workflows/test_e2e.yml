@@ -123,6 +123,8 @@ jobs:
       - name: Install webcamoid
         run: |
           brew cask install webcamoid
+          pwd
+          cd ..
           ls
           cat ~/Library/Preferences/com.webcamoid.Webcamoid.plist
       # - name: Setup Appium
