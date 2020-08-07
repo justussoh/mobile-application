@@ -123,7 +123,7 @@ jobs:
       - name: Install webcamoid
         run: |
           brew cask install webcamoid
-          open -a Webcamoid /Applications/webcamoid.app
+          open -a /Applications/webcamoid.app
           cd /Library/Preferences
           ls
           cat /Library/Preferences/com.webcamoid.Webcamoid.plist
