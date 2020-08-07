@@ -124,9 +124,8 @@ jobs:
         run: |
           brew cask install webcamoid
           open -a /Applications/webcamoid.app
-          cd /Library/Preferences
-          ls
-          cat /Library/Preferences/com.webcamoid.Webcamoid.plist
+          sleep 60
+          ls /Library/Preferences/ | webcamoid
       # - name: Setup Appium
       #   run: npm install appium -g
       # - name: Setup E2E Environment
