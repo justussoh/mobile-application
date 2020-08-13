@@ -12,15 +12,9 @@ jobs:
         with:
           repository: "rationally-app/mobile-e2e"
           token: ${{ secrets.TESTING }}
-      - run: ls
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
       - uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: Setup Appium
-        run: npm install appium -g
       - name: Setup E2E Environment
         run: |
           wget -O Exponent.apk http://expo.io/--/api/v2/versions/download-android-apk
