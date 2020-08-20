@@ -34,7 +34,4 @@ jobs:
         with:
           name: output_android
           path: |
-            ./log.html
-            ./report.html
-            ./output.xml
-            ./appium-screenshot-?.png
+            ./result
