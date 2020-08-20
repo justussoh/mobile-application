@@ -28,10 +28,13 @@ jobs:
       - name: Run E2E Tests
         run: ./e2e_run_all_tests_pCloudy.sh
       - run: ls
+      - name: Get Current Date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Upload Appium Logs
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: output_android
+          name: Combined-Output-${{ steps.date.outputs.date }}
           path: |
             ./result
