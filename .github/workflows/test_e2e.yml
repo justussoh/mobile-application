@@ -26,7 +26,7 @@ jobs:
           wget -O Exponent.apk http://expo.io/--/api/v2/versions/download-android-apk
           pip3 install -r requirements.txt
       - name: Run E2E Tests
-        run: ./stg_loginflow_deeplink_pCloudy.sh
+        run: ./e2e_run_all_tests_pCloudy.sh
       - run: ls
       - name: Upload Appium Logs
         if: always()
